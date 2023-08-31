@@ -54,6 +54,15 @@ int main(int argc, char *argv[]) {
   assert(mpi_thread_level_available >= mpi_thread_level_required);
 #endif
 
+#ifdef KRS_ENABLE_ISHMEMSPACE
+  ishmem_attr_t attr;
+
+  attr.runtime = ISHMEM_RUNTIME_OPENSHMEM;
+  attr.initialize_runtime = true;
+  attr.gpu = true;
+  ishmem_init_attr(&attr);
+#endif
+
   Kokkos::initialize(argc, argv);
   ::testing::InitGoogleTest(&argc, argv);
   RemoteSpace_t::fence();
@@ -61,6 +70,9 @@ int main(int argc, char *argv[]) {
 
   Kokkos::finalize();
 
+#ifdef KRS_ENABLE_ISHMEMSPACE
+  ishmem_finalize();
+#endif
 #ifdef KRS_ENABLE_NVSHMEMSPACE
   nvshmem_finalize();
 #endif

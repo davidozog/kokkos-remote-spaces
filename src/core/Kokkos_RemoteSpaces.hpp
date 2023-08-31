@@ -74,6 +74,15 @@ class MPISpace;
 #include <Kokkos_MPISpace.hpp>
 #endif
 
+#ifdef KRS_ENABLE_ISHMEMSPACE
+namespace Kokkos {
+namespace Experimental {
+class ISHMEMSpace;
+}
+}  // namespace Kokkos
+#include <Kokkos_ISHMEMSpace.hpp>
+#endif
+
 namespace Kokkos {
 namespace Experimental {
 
@@ -89,7 +98,11 @@ typedef SHMEMSpace DefaultRemoteMemorySpace;
 #ifdef KRS_ENABLE_MPISPACE
 typedef MPISpace DefaultRemoteMemorySpace;
 #else
+#ifdef KRS_ENABLE_ISHMEMSPACE
+typedef ISHMEMSpace DefaultRemoteMemorySpace;
+#else
 error "At least one remote space must be selected."
+#endif
 #endif
 #endif
 #endif

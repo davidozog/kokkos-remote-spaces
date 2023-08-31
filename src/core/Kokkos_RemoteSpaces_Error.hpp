@@ -35,6 +35,7 @@ class RemoteSpacesMemoryAllocationFailure : public std::bad_alloc {
     SHMEMMALLOCDEFAULT,
     SHMEMMALLOC,
     NVSHMEMMALLOC,
+    ISHMEMMALLOC,
     ROCSHMEMMALLOC,
     MPIWINALLOC
   };
@@ -115,8 +116,10 @@ class RemoteSpacesMemoryAllocationFailure : public std::bad_alloc {
     }
     o << "  (The allocation mechanism was ";
     switch (m_mechanism) {
+      case AllocationMechanism::SHMEMMALLOCDEFAULT: o << "shmem_malloc()."; break;
       case AllocationMechanism::SHMEMMALLOC: o << "shmem_malloc()."; break;
       case AllocationMechanism::NVSHMEMMALLOC: o << "nvshmem_malloc()."; break;
+      case AllocationMechanism::ISHMEMMALLOC: o << "ishmem_malloc()."; break;
       case AllocationMechanism::ROCSHMEMMALLOC:
         o << "rocshmem_malloc().";
         break;
