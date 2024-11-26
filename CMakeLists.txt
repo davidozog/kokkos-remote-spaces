@@ -9,6 +9,8 @@ set(CMAKE_DISABLE_SOURCE_CHANGES ON)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/modules)
 
+cmake_policy(SET CMP0144 NEW)
+
 find_package(Kokkos REQUIRED)
 
 option(KRS_ENABLE_NVSHMEMSPACE "Whether to build with NVSHMEM space" OFF)
