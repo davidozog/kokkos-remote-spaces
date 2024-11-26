@@ -787,7 +787,7 @@ contiguous_fill_or_memset(
 // leading to the significant performance issues
 #ifndef KOKKOS_ARCH_A64FX
   if (Impl::is_zero_byte(value))
-    ZeroMemset<ExecutionSpace, View<DT, DP...>>(exec_space, dst, value);
+    ZeroMemset<ExecutionSpace>(exec_space, dst, value);
   else
 #endif
     contiguous_fill(exec_space, dst, value);
@@ -825,7 +825,7 @@ contiguous_fill_or_memset(
 // leading to the significant performance issues
 #ifndef KOKKOS_ARCH_A64FX
   if (Impl::is_zero_byte(value))
-    ZeroMemset<exec_space_type, View<DT, DP...>>(dst, value);
+    ZeroMemset<exec_space_type>(dst, value);
   else
 #endif
     contiguous_fill(exec_space_type(), dst, value);

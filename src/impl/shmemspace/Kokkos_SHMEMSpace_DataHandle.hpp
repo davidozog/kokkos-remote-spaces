@@ -59,7 +59,7 @@ struct BlockDataHandle {
 
   KOKKOS_INLINE_FUNCTION
   BlockDataHandle(BlockDataHandle<T, Traits> const &arg)
-      : src(arg.src), dst(arg.dst), elems(arg.elems), pe(arg.pe_) {}
+      : src(arg.src), dst(arg.dst), elems(arg.elems), pe(arg.pe) {}
 
   template <typename SrcTraits>
   KOKKOS_INLINE_FUNCTION BlockDataHandle(SrcTraits const &arg)
